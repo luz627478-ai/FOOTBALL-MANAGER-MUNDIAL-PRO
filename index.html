@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d16">
+  <meta name="description" content="Football Manager Mundial Pro: administra tu club, juega ligas y compite por trofeos.">
+  <title>Football Manager Mundial Pro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div>
+      <h1>FOOTBALL MANAGER <span>MUNDIAL PRO</span></h1>
+      <small id="season">TEMPORADA 2026/27</small>
+    </div>
+    <div class="wallet">PRESUPUESTO<strong id="money">$10.000.000</strong></div>
+  </header>
+
+  <section id="setup" class="panel setup">
+    <h2>COMENZAR CARRERA</h2>
+    <label for="country">País</label>
+    <select id="country"></select>
+    <label for="division">División</label>
+    <select id="division">
+      <option value="0">Primera división</option>
+      <option value="1">Segunda división</option>
+    </select>
+    <label for="club">Club</label>
+    <select id="club"></select>
+    <button id="start">EMPEZAR CARRERA</button>
+    <button id="continue" class="secondary">CONTINUAR PARTIDA</button>
+  </section>
+
+  <main id="game" hidden>
+    <section class="clubbar">
+      <div><h2 id="clubName"></h2><small id="leagueName"></small></div>
+      <div class="right"><strong id="reputation">50</strong><small>REPUTACIÓN</small></div>
+    </section>
+
+    <nav class="nav" aria-label="Navegación del juego">
+      <button data-page="home">Inicio</button><button data-page="live">Partido</button>
+      <button data-page="competitions">Competiciones</button><button data-page="calendar">Calendario</button>
+      <button data-page="table">Clasificación</button><button data-page="squad">Plantilla</button>
+      <button data-page="market">Fichajes</button><button data-page="offers">Ofertas</button>
+      <button data-page="stats">Estadísticas</button><button data-page="trophies">Trofeos</button>
+      <button data-page="tactics">Tácticas</button><button data-page="finance">Finanzas</button>
+      <button data-page="news">Noticias</button>
+    </nav>
+
+    <section id="home" class="page">
+      <div class="stats">
+        <div class="panel">JORNADA<strong id="round">0</strong></div>
+        <div class="panel">POSICIÓN<strong id="position">-</strong></div>
+        <div class="panel">VICTORIAS<strong id="wins">0</strong></div>
+        <div class="panel">GOLES<strong id="goals">0</strong></div>
+      </div>
+      <div class="panel">
+        <h3>PRÓXIMO PARTIDO</h3><div id="nextMatch"></div>
+        <button id="openMatch">IR AL PARTIDO</button>
+        <button id="simulate" class="secondary">SIMULAR JORNADA</button>
+      </div>
+      <div class="panel"><h3>NOTICIAS</h3><div id="latestNews"></div></div>
+      <button id="save">GUARDAR CARRERA</button>
+      <button id="newSeason" hidden>⚽ EMPEZAR NUEVA TEMPORADA</button>
+    </section>
+
+    <section id="live" class="page" hidden>
+      <div class="panel live-panel">
+        <div class="live-label" id="competitionName">PARTIDO DE LIGA</div>
+        <div id="matchStage">JORNADA 1</div>
+        <div class="scoreboard">
+          <div><div class="team-icon">🏠</div><h2 id="liveHome">LOCAL</h2></div>
+          <div class="score"><strong id="liveScore">0 - 0</strong><span id="liveMinute">0'</span></div>
+          <div><div class="team-icon">🚌</div><h2 id="liveAway">VISITANTE</h2></div>
+        </div>
+        <div class="time-track"><div id="timeProgress"></div></div>
+        <div id="liveStatus">Preparado para comenzar</div>
+        <label for="speed">Velocidad del partido</label>
+        <select id="speed"><option value="1800">Normal</option><option value="700" selected>Rápida</option><option value="250">Muy rápida</option></select>
+        <div class="live-actions">
+          <button id="startLive">COMENZAR</button><button id="pauseLive" class="secondary" disabled>PAUSAR</button>
+          <button id="nextLive" hidden>SIGUIENTE PARTIDO</button>
+        </div>
+      </div>
+      <div class="panel"><h3>ACONTECIMIENTOS</h3><div id="matchEvents">El partido todavía no comienza.</div></div>
+    </section>
+
+    <section id="competitions" class="page" hidden><div class="panel"><h2>COMPETICIONES</h2><div id="competitionList"></div></div></section>
+    <section id="calendar" class="page" hidden><div class="panel"><h2>CALENDARIO</h2><div id="calendarList"></div></div></section>
+    <section id="table" class="page" hidden><div class="panel"><h2>CLASIFICACIÓN</h2><div id="leagueTable"></div></div></section>
+    <section id="squad" class="page" hidden><div class="panel"><h2>PLANTILLA</h2><div id="squadList"></div></div></section>
+    <section id="market" class="page" hidden><div class="panel"><h2>FICHAJES</h2><input id="marketSearch" placeholder="Buscar jugador o equipo"><div id="marketList"></div></div></section>
+    <section id="offers" class="page" hidden><div class="panel"><h2>OFERTAS</h2><div id="offersList"></div></div></section>
+    <section id="stats" class="page" hidden><div class="panel"><h2>ESTADÍSTICAS</h2><div id="playerStats"></div></div></section>
+    <section id="trophies" class="page" hidden><div class="panel"><h2>🏆 TROFEOS</h2><div id="trophyList"></div></div></section>
+    <section id="tactics" class="page" hidden>
+      <div class="panel"><h2>TÁCTICAS</h2>
+        <select id="formation"><option>4-3-3</option><option>4-4-2</option><option>4-2-3-1</option></select>
+        <select id="style"><option>Equilibrado</option><option>Posesión</option><option>Contraataque</option><option>Presión alta</option></select>
+        <button id="saveTactics">GUARDAR</button>
+      </div>
+    </section>
+    <section id="finance" class="page" hidden><div class="panel"><h2>FINANZAS</h2><div id="financeInfo"></div></div></section>
+    <section id="news" class="page" hidden><div class="panel"><h2>NOTICIAS</h2><div id="newsList"></div></div></section>
+  </main>
+  <div id="toast" role="status" aria-live="polite"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
